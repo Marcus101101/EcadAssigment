@@ -37,17 +37,25 @@ include("header.php"); // Include the Page Layout header
         //				 display the selling price in red in a new paragraph
         $product = "productDetails.php?pid=$row[ProductID]";
         $formattedPrice = number_format($row["Price"], 2);
+         $formattedOfferedPrice = number_format($row["OfferedPrice"], 2);
         echo "<div class='col-8'>"; // 67% of row width
         echo "<p><a href=$product>$row[ProductTitle]</a>";
 
           // On Offer Logic
-          if ($row['offered'] == 1 && $row['OfferStartDate'] <= date('Y-m-d') && $row['OfferEndDate'] >= date('Y-m-d')):
-                 echo "<span class='on-offer'>On Offer</span>";
+          if ($row['offered'] == 1):
+                 echo "<span style='color: red; font-weight: bold; margin-left: 5px; display: inline-block;'>On Offer</span>";
           endif;
 
           echo "</p>";
-        echo "Price:<span style='font-weight: bold; color: red;'>
-              S$ $formattedPrice</span>";
+          if ($row['offered'] == 1):
+                echo "Price: <strike>S$ $formattedPrice</strike>
+                    <span style='font-weight: bold; color: red;'>
+                     S$ $formattedOfferedPrice</span>";
+           else:
+                 echo "Price:<span style='font-weight: bold; color: red;'>
+                     S$ $formattedPrice</span>";
+          endif;
+
         echo "</div>";
 
         // Right column - display the product's image

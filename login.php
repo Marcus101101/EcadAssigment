@@ -37,9 +37,10 @@ include("header.php");
 <!-- 4th row - Login Button --> 
  <div class='mb-3 row'> 
     <div class='col-sm-9 offset-sm-3'>
-        <button type='submit' class="btn btn-primary >Login</button>
+        
+        <button type='submit' class="btn btn-primary" >Login</button> 
         <p>Please sign up if you do not have an account </p>
-        <p><a href="forgetPassword.php">forgetPassword</a></p>
+        <p><a href="forgetPassword.php">Forget Password</a></p>
     </div>
 </div>
 </form>

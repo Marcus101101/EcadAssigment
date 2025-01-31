@@ -22,8 +22,24 @@ body {
     padding: 10px 20px;
 }
 
-.on-offer {
-    color: green;
-    font-weight: bold;
-    margin-left: 5px;
-  }
+.search-button {
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none; /* Remove default border */
+    cursor: pointer; /* Indicate it's clickable */
+    font-size: 14px; /* match the font size of your buttons*/
+}
+
+
+button[disabled].search-button {
+    background-color: lightgray !important;
+      /* Optional styles: */
+    color: white !important;
+    border-radius: 5px !important;
+    padding: 10px 20px !important;
+     border: none !important;
+    cursor: not-allowed !important;
+    font-size: 14px !important; /* match the font size of your buttons*/
+}

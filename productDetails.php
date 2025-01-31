@@ -66,7 +66,7 @@ while ($row = $result->fetch_array()) { // start while loop {
     if ($row['offered'] == 1) { // start if
         echo "<span class='on-offer'>On Offer</span>";
         echo "<p>Price Before Offer: <strike>S$" . number_format($row['Price'], 2) . "</strike></p>";
-        echo "<p>Price: <span class='price'>S$" . number_format($row['OfferedPrice'], 2) . "</span></p>";
+        echo "<p>Price: <span style='color: red; font-weight:bold;'>S$" . number_format($row['OfferedPrice'], 2) . "</span></p>";
     } else { // else statement for offer check
         echo "Price: <span class='price'>S$" . $formattedPrice . "</span>";
     } // end if for offer check
@@ -81,14 +81,14 @@ while ($row = $result->fetch_array()) { // start while loop {
             <input type='hidden' name='product_id' value='<?php echo $pid; ?>' />
             Quantity: <input type='number' name='quantity' value='1'
                             min='1' max='10' style='width:40px' required />
-            <button type='submit'>Add to Cart</button>
+            <button type='submit'class="search-button">Add to Cart</button>
         </form>
         <?php
     // To Do 2:  Ending ....
      } else { // else statement for out of stock check
          ?>
         <span class='out-of-stock'>Out of Stock</span>
-        <button disabled>Add to Cart</button>
+        <button disabled  class="search-button">Add to Cart</button>
     <?php
       } // end if for out of stock check
 
