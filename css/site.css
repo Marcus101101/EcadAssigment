@@ -21,3 +21,9 @@ body {
     border-radius: 5px;
     padding: 10px 20px;
 }
+
+.on-offer {
+    color: green;
+    font-weight: bold;
+    margin-left: 5px;
+  }
