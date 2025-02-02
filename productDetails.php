@@ -82,7 +82,7 @@ while ($row = $result->fetch_array()) { // start while loop {
     // To Do 2:  Ending ....
      } else { // else statement for out of stock check
          ?>
-        <span class='out-of-stock'>Out of Stock</span>
+        <span style='font-weight: bold; color: red;'> Out of Stock</span> 
         <button disabled class="search-button">Add to Cart</button>
      <?php
       } // end if for out of stock check

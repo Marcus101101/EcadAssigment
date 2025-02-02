@@ -16,24 +16,25 @@ date_default_timezone_set('Asia/Singapore'); //set the timezone
     <div class="mb-3 row"> <!-- 2nd row -->
         <label for="keywords" class="col-sm-3 col-form-label">Product Title or Description:</label>
         <div class="col-sm-6">
-            <input class="form-control" name="keywords" id="keywords" type="search" />
+            <input class="form-control" name="keywords" id="keywords" type="search" value="<?php echo isset($_GET['keywords']) ? htmlspecialchars($_GET['keywords']) : ''; ?>" />
         </div>
       
     </div>  <!-- End of 2nd row -->
     <div class="mb-3 row"> <!-- 3rd row -->
     <label for="min_price" class="col-sm-3 col-form-label">Min Price:</label>
         <div class="col-sm-3">
-            <input class="form-control" name="min_price" id="min_price" type="number" step="0.01" style="max-width: 80px;" min="0" max="99999"/>
+            <input class="form-control" name="min_price" id="min_price" type="number" step="0.01" style="max-width: 80px;" min="0" max="99999" value="<?php echo isset($_GET['min_price']) ? htmlspecialchars($_GET['min_price']) : ''; ?>"/>
         </div>
            <label for="max_price" class="col-sm-1 col-form-label">Max Price:</label>
         <div class="col-sm-3">
-            <input class="form-control" name="max_price" id="max_price" type="number" step="0.01" style="max-width: 80px;" min="0" max="99999"/>
+            <input class="form-control" name="max_price" id="max_price" type="number" step="0.01" style="max-width: 80px;" min="0" max="99999" value="<?php echo isset($_GET['max_price']) ? htmlspecialchars($_GET['max_price']) : ''; ?>"/>
         </div>
     </div>  <!-- End of 3rd row -->
      <div class="mb-3 row"> <!-- 4th row -->
          <label for="on_offer" class="col-sm-3 col-form-label">On Offer:</label>
           <div class="col-sm-6">
-            <input type="checkbox" name="on_offer" id="on_offer" value="1" />
+             <input type="checkbox" name="on_offer" id="on_offer" value="1" <?php if(isset($_GET['on_offer']) && $_GET['on_offer'] == 1) echo 'checked'; ?> />
+
           </div>
       <div class="col-sm-3">
             <button type="submit"  class="search-button">Search</button>
