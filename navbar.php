@@ -12,8 +12,7 @@ if(isset($_SESSION["ShopperName"])) {
     //after shopper has logged in.
     
 	$content2 =  "<li class='nav-item'>
-	              <a class='nav-link' href='changePassword.php'>Change Password</a></li>
-				  <li class='nav-item'>
+	              <li class='nav-item'>
 	              <a class='nav-link' href='logout.php'>Logout</a></li>";
 }
 ?>
@@ -25,7 +24,7 @@ if(isset($_SESSION["ShopperName"])) {
             <!-- Left Justifed menu items -->
              <ul class="navbar-nav me-auto"   >
                 <li class="nav-item" >
-                    <a class="nav-link" href="promotion.php">Current Promotions</a>
+                    <a class="nav-link" href="promotion.php">Promotions</a>
                 </li>
                 <li class="nav-item" >
                     <a class="nav-link" href="category.php">Product Categories</a>
