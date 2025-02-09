@@ -13,7 +13,6 @@ if (! isset($_SESSION["ShopperID"])) { // Check if user logged in
 echo "<div id='myShopCart' style='margin:auto'>"; // Start a container
 if (isset($_SESSION["Cart"])) {
 	include_once("mysql_conn.php");
-	// To Do 1 (Practical 4): 
 	// Retrieve from database and display shopping cart in a table
 	$qry = "SELECT *, (Price*Quantity) AS Total
         FROM ShopCartItem WHERE ShopCartID=?";
@@ -26,7 +25,6 @@ if (isset($_SESSION["Cart"])) {
 	
 	
 	if ($result->num_rows > 0) {
-		// To Do 2 (Practical 4): Format and display 
 		// the page header and header row of shopping cart page
 		echo "<p class='page-title' style='text-align:center'>Shopping Cart</p>"; 
 		echo "<div class='table-responsive' >"; // Bootstrap responsive table
@@ -40,8 +38,7 @@ if (isset($_SESSION["Cart"])) {
 		echo "<th>&nbsp;</th>";
 		echo "</tr>"; // End of header row
 		echo "</thead>"; // End of table's header section
-				
-		// To Do 3 (Practical 4): 
+				 
 		// Display the shopping cart content
 		$subTotal = 0; // Declare a variable to compute subtotal before tax
 		echo "<tbody>"; // Start of table's body section
@@ -104,7 +101,7 @@ if (isset($_SESSION["Cart"])) {
 		echo "</table>"; // End of table
 		echo "</div>"; // End of Bootstrap responsive table
 				
-		// To Do 4 (Practical 4): 
+		 
 		// Display the subtotal at the end of the shopping cart
 		echo "<p style='text-align:right; font-size:20px'>";
 		echo "Subtotal = S$" . number_format($subTotal, 2);
@@ -125,7 +122,6 @@ if (isset($_SESSION["Cart"])) {
 		// Display the final total
 		//echo "<br>Final Total = S$". number_format($finalTotal, 2);
 	
-		// To Do 7 (Practical 5):
 		// Add PayPal Checkout button on the shopping cart page
 		// Checkout Button (Simple Redirect)
 		echo "<div style='text-align:right; margin-top:20px;'>";
