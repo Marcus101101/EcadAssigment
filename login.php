@@ -1,8 +1,6 @@
 <?php
 //Detect the current session
 session_start();
-//Include the Page Layout header
-include("header.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +17,6 @@ include("header.php");
   </style>
 </head>
 <body>
-
 <div class="container login-container">
   <div class="row justify-content-center">
     <div class="col-md-6">

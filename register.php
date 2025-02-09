@@ -1,9 +1,72 @@
 <?php 
 // Detect the current session
 session_start(); 
-// Include the Page Layout header
-include("header.php"); 
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Membership Registration</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+  .registration-container {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+<div class="container registration-container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Membership Registration</h4>
+        </div>
+        <div class="card-body">
+          <form name="register" action="addMember.php" method="post" onsubmit="return validateForm()">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="email">Email Address:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="country">Country:</label>
+                <input type="text" class="form-control" id="country" name="country">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="password2">Retype Password:</label>
+                <input type="password" class="form-control" id="password2" name="password2" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
 function validateForm()
 {
@@ -32,71 +95,8 @@ function validateForm()
 }
 </script>
 
-<div style="width:80%; margin:auto;">
-<form name="register" action="addMember.php" method="post" 
-      onsubmit="return validateForm()">
-    <div class="mb-3 row">
-        <div class="col-sm-9 offset-sm-3">
-            <span class="page-title">Membership Registration</span>
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="name">Name:</label>
-        <div class="col-sm-9">
-            <input class="form-control" name="name" id="name" 
-                   type="text" required /> (required)
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="address">Address:</label>
-        <div class="col-sm-9">
-            <textarea class="form-control" name="address" id="address"
-                      cols="25" rows="4" ></textarea>
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="country">Country:</label>
-        <div class="col-sm-9">
-            <input class="form-control" name="country" id="country" type="text" />
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="phone">Phone:</label>
-        <div class="col-sm-9">
-            <input class="form-control" name="phone" id="phone" type="text" />
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="email">
-            Email Address:</label>
-        <div class="col-sm-9">
-            <input class="form-control" name="email" id="email" 
-                   type="email" required /> (required)
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="password">
-            Password:</label>
-        <div class="col-sm-9">
-            <input class="form-control" name="password" id="password" 
-                   type="password" required /> (required)
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label" for="password2">
-            Retype Password:</label>
-        <div class="col-sm-9">
-            <input class="form-control" name="password2" id="password2" 
-                   type="password" required /> (required)
-        </div>
-    </div>
-    <div class="mb-3 row">       
-        <div class="col-sm-9 offset-sm-3">
-            <button type="submit">Register</button>
-        </div>
-    </div>
-</form>
-</div>
+</body>
+</html>
 <?php 
 // Include the Page Layout footer
 include("footer.php"); 
