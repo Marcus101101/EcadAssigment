@@ -144,9 +144,3 @@ else {
 echo "</div>"; // End of container
 include("footer.php"); // Include the Page Layout footer
 ?>
-
-<DOCTYPE html>
-<div style="text-align:right; margin-top:20px;">
-    <a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>
-</div>
-</html>

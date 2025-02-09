@@ -39,10 +39,11 @@ $result = $stmt->get_result();
 // Calculate total price
 $subtotal = 0;
 $items = [];
+$insufficientStock = false; // Flag to check if any item is out of stock
 while ($row = $result->fetch_assoc()) {
     if ($row['Quantity'] > $row['Stock']) {
-        echo "<p>Insufficient stock for {$row['Name']}!</p>";
-        exit();
+        $insufficientStock = true; // Set flag if stock is insufficient
+        echo "<div class='alert alert-danger text-center mt-4'>⚠️ Insufficient stock for <strong>{$row['Name']}</strong>! (Only {$row['Stock']} left in stock)</div>";
     }
     $items[] = $row;
     $subtotal += $row['Price'] * $row['Quantity'];
@@ -112,37 +113,27 @@ $total = $subtotal + $gst + $delivery_charge;
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const deliverySelect = document.getElementById("delivery_mode");
-            const deliveryChargeElement = document.getElementById("delivery_charge");
-            const totalPriceElement = document.getElementById("total_price");
-            let subtotal = <?= $subtotal ?>;
-            let gst = <?= $gst ?>;
-            
-            function updateTotal() {
-                let deliveryCharge = (deliverySelect.value === "express") ? 10.00 : 5.00;
-                let total = subtotal + gst + deliveryCharge;
-
-                deliveryChargeElement.textContent = deliveryCharge.toFixed(2);
-                totalPriceElement.textContent = total.toFixed(2);
-            }
-
-            deliverySelect.addEventListener("change", updateTotal);
-
+        const insufficientStock = <?= $insufficientStock ? 'true' : 'false' ?>;
+        if (insufficientStock) {
+            document.getElementById("paypal-button-container").innerHTML = 
+                "<div class='alert alert-warning text-center'>⚠️ Please update your cart before checking out.</div>";
+        } else {
             paypal.Buttons({
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
-                            amount: { value: totalPriceElement.textContent }
+                            amount: { value: '<?= number_format($total, 2) ?>' }
                         }]
                     });
                 },
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
-                        window.location.href = "order_confirmation.php?order_id=" + details.id + "&delivery_mode=" + deliverySelect.value;
+                        window.location.href = "order_confirmation.php?order_id=" + details.id;
                     });
                 }
             }).render('#paypal-button-container');
-        });
+        }
+    });
     </script>
 </body>
 </html>
