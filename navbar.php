@@ -17,34 +17,30 @@ if(isset($_SESSION["ShopperName"])) {
 }
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Little Sprouts</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="index.php">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="promotion.php">Promotions</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="category.php">Product Categories</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="search.php">Product Search</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="shoppingCart.php">Shopping Cart</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="register.php">Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="login.php">Login</a>
-      </li>
-    </ul>
-  </div>
+<nav class="navbar navbar-expand-md"  style="display:inline-block; vertical-align:middle;"  >
+    <div class="container-fluid" >
+        <!-- Collapsible part of the navbar -->
+         <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <!-- Left Justifed menu items -->
+             <ul class="navbar-nav me-auto"   >
+                <li class="nav-item" >
+                    <a class="nav-link" href="promotion.php">Promotions</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="category.php">Product Categories</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="search.php">Product Search</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="shoppingCart.php">Shopping Cart</a>
+                </li>
+                
+            </ul>
+          </div>
+           <!-- Right Justified menu items -->
+            <ul class="navbar-nav ms-auto" >
+                    <?php echo $content2; ?>
+            </ul>
+    </div>
 </nav>
