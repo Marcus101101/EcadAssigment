@@ -124,11 +124,13 @@ if (isset($_SESSION["Cart"])) {
 
 		// Display the final total
 		echo "<br>Final Total = S$". number_format($finalTotal, 2);
-
-		
 	
 		// To Do 7 (Practical 5):
 		// Add PayPal Checkout button on the shopping cart page
+		// Checkout Button (Simple Redirect)
+		echo "<div style='text-align:right; margin-top:20px;'>";
+		echo "<a href='checkout.php' class='btn btn-primary'>Proceed to Checkout</a>";
+		echo "</div>";
 				
 	}
 	else {
@@ -142,3 +144,9 @@ else {
 echo "</div>"; // End of container
 include("footer.php"); // Include the Page Layout footer
 ?>
+
+<DOCTYPE html>
+<div style="text-align:right; margin-top:20px;">
+    <a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>
+</div>
+</html>
