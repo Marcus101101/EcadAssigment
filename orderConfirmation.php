@@ -2,6 +2,7 @@
 session_start();
 include 'mysql_conn.php';
 
+// Ensure an order ID exists
 if (!isset($_GET['order_id'])) {
     echo "Invalid order!";
     exit();
@@ -38,6 +39,15 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
+// Update inventory levels
+foreach ($purchasedItems as $item) {
+    $updatedQry = "UPDATE Product SET Quantity = Quantity - ? WHERE ProductID=?";
+    $stmt = $conn->prepare($updatedQry);
+    $stmt->bind_param("ii", $item['Quantity'], $item['ProductID']);
+    $stmt->execute();
+    $stmt->close();
+}
+
 // Insert order details into the database
 $qry = "INSERT INTO OrderData (ShopCartID, ShipName, ShipAddress, ShipCountry, ShipPhone, ShipEmail, OrderStatus) 
         SELECT ?, Name, Address, Country, Phone, Email, 1 FROM Shopper WHERE ShopperID=?";
@@ -45,15 +55,6 @@ $stmt = $conn->prepare($qry);
 $stmt->bind_param("ii", $cartID, $shopperID);
 $stmt->execute();
 $stmt->close();
-
-// Update inventory
-foreach ($items as $item) {
-    $qry = "UPDATE Product SET Quantity = Quantity - ? WHERE ProductID=?";
-    $stmt = $conn->prepare($qry);
-    $stmt->bind_param("ii", $item['Quantity'], $item['ProductID']);
-    $stmt->execute();
-    $stmt->close();
-}
 
 // Mark cart as checked out
 $qry = "UPDATE ShopCart SET OrderPlaced=1 WHERE ShopCartID=?";
