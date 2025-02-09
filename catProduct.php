@@ -17,12 +17,13 @@ include("header.php"); // Include the Page Layout header
     include_once("mysql_conn.php");
 
     // To Do:  Starting ....
-    $cid=$_GET["cid"]; //Read category ID from query string
-    // Form SQL to retrieve list of products asscociated to the Category ID
-     $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Quantity,
+    $cid = $_GET["cid"]; // Read category ID from query string
+    // Form SQL to retrieve list of products associated to the Category ID
+    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Quantity,
                    p.offered, p.OfferStartDate, p.OfferEndDate, p.OfferedPrice
             FROM CatProduct cp INNER JOIN product p ON cp.ProductID=p.ProductID
-            WHERE cp.CategoryID=?" ;
+            WHERE cp.CategoryID=?
+            ORDER BY p.ProductTitle ASC"; // Added ORDER BY clause here
     $stmt = $conn->prepare($qry);
     $stmt->bind_param("i", $cid); // i - integer
     $stmt->execute();
@@ -37,26 +38,26 @@ include("header.php"); // Include the Page Layout header
         //				 display the selling price in red in a new paragraph
         $product = "productDetails.php?pid=$row[ProductID]";
         $formattedPrice = number_format($row["Price"], 2);
-           $formattedOfferedPrice = number_format($row["OfferedPrice"],2);
+        $formattedOfferedPrice = number_format($row["OfferedPrice"], 2);
         echo "<div class='col-8'>"; // 67% of row width
         echo "<p><a href=$product>$row[ProductTitle]</a>";
-         $offerStartDate = strtotime($row['OfferStartDate']);
-         $offerEndDate = strtotime($row['OfferEndDate']);
-         $today = strtotime(date('Y-m-d'));
-          // On Offer Logic
-          if ($row['offered'] == 1 && $offerStartDate <= $today && $offerEndDate >= $today):
+        $offerStartDate = strtotime($row['OfferStartDate']);
+        $offerEndDate = strtotime($row['OfferEndDate']);
+        $today = strtotime(date('Y-m-d'));
+        // On Offer Logic
+        if ($row['offered'] == 1 && $offerStartDate <= $today && $offerEndDate >= $today) :
             echo "<span style='color: red; font-weight: bold; margin-left: 5px; display: inline-block;'>On Offer</span>";
-          endif;
+        endif;
 
-          echo "</p>";
-           if ($row['offered'] == 1 && $offerStartDate <= $today && $offerEndDate >= $today):
-                echo "Price: <strike>S$ $formattedPrice</strike>
+        echo "</p>";
+        if ($row['offered'] == 1 && $offerStartDate <= $today && $offerEndDate >= $today) :
+            echo "Price: <strike>S$ $formattedPrice</strike>
                     <span style='font-weight: bold; color: red;'>
                      S$ $formattedOfferedPrice</span>";
-           else:
-                 echo "Price:<span style='font-weight: bold; color: red;'>
+        else :
+            echo "Price:<span style='font-weight: bold; color: red;'>
                      S$ $formattedPrice</span>";
-          endif;
+        endif;
 
         echo "</div>";
 

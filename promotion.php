@@ -15,10 +15,11 @@ include("header.php"); // Include the Page Layout header
     // Include the PHP file that establishes database connection handle: $conn
     include_once("mysql_conn.php");
 
-    // Form SQL to retrieve list of products currently on offer
-     $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.OfferedPrice
+    // Form SQL to retrieve list of products currently on offer, ordered alphabetically
+    $qry = "SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.OfferedPrice
             FROM product p
-            WHERE p.offered = 1 AND p.OfferStartDate <= CURDATE() AND p.OfferEndDate >= CURDATE()";
+            WHERE p.offered = 1 AND p.OfferStartDate <= CURDATE() AND p.OfferEndDate >= CURDATE()
+            ORDER BY p.ProductTitle ASC"; // Added ORDER BY clause
     $stmt = $conn->prepare($qry);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -37,7 +38,7 @@ include("header.php"); // Include the Page Layout header
         echo "<div class='col-8'>"; // 67% of row width
         echo "<p><a href=$product>$row[ProductTitle]</a></p>";
         echo "Price: <strike>S$ $formattedPrice</strike> <span style='font-weight: bold; color: red;'>S$ $formattedOfferPrice</span>";
-      echo "</div>";
+        echo "</div>";
 
         // Right column - display the product's image
         $img = "./Images/products/$row[ProductImage]";
