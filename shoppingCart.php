@@ -69,6 +69,8 @@ if (isset($_SESSION["Cart"])) {
 			echo "</form>";
 			echo "</td>";
 
+			$itemCount += $row["Quantity"];
+
 			$formattedTotal = number_format($row["Total"], 2);
 			echo "<td>$formattedTotal</td>";
 			echo "<td>"; // Column for remove item from shopping cart
@@ -79,17 +81,25 @@ if (isset($_SESSION["Cart"])) {
 			echo "</form>";
 			echo "</td>";
 			echo "</tr>";
+			
+			if (!isset($_SESSION['cart'])) {
+    			$_SESSION['cart'] =[];
+			}
 
-
-			// To Do 5 (Practical 5):
-			// Declare an array to store the shopping cart items in session variable 	
-
-			// To Do 6 (Practical 5):
-		    // Store the shopping cart items in session variable as an associate array
+			// Store the shopping cart items in session variable as an associative array
+			$_SESSION['cart'] = [
+    			'ProductID' => $row['ProductID'],
+    			'Name' => $row['Name'],
+    			'Price' => $row['Price'],
+    			'Quantity' => $row['Quantity'],
+			];
 				
 			// Accumulate the running sub-total
 			$subTotal += $row["Total"];
 		}
+		// Display the item count
+		echo "<p style='text-align:right; font-size:20px'>";
+		echo "Total Items: ". $itemCount;
 		echo "</tbody>"; // End of table's body section
 		echo "</table>"; // End of table
 		echo "</div>"; // End of Bootstrap responsive table
@@ -100,7 +110,23 @@ if (isset($_SESSION["Cart"])) {
 		echo "Subtotal = S$" . number_format($subTotal, 2);
 		$_SESSION["SubTotal"] = round($subTotal, 2);
 
-			
+		// Delivery waiver logic
+		$deliveryCharge = 10; // Assuming a fixed delivery charge of S$10
+		$finalTotal = $subTotal;
+
+		if ($subTotal > 200) {
+    		echo "<br>Delivery charge waived!";
+    		$deliveryCharge = 0;
+		} else {
+    		$finalTotal += $deliveryCharge;
+    		echo "<br>Delivery charge: S$". number_format($deliveryCharge, 2);
+		}
+
+		// Display the final total
+		echo "<br>Final Total = S$". number_format($finalTotal, 2);
+
+		
+	
 		// To Do 7 (Practical 5):
 		// Add PayPal Checkout button on the shopping cart page
 				
