@@ -117,13 +117,13 @@ if (isset($_SESSION["Cart"])) {
 		if ($subTotal > 200) {
     		echo "<br>Delivery charge waived!";
     		$deliveryCharge = 0;
-		} else {
+		} /*else {
     		$finalTotal += $deliveryCharge;
     		echo "<br>Delivery charge: S$". number_format($deliveryCharge, 2);
-		}
+		}*/
 
 		// Display the final total
-		echo "<br>Final Total = S$". number_format($finalTotal, 2);
+		//echo "<br>Final Total = S$". number_format($finalTotal, 2);
 	
 		// To Do 7 (Practical 5):
 		// Add PayPal Checkout button on the shopping cart page
